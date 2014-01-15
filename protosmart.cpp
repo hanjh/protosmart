@@ -39,21 +39,29 @@ void lcd_update()
        2 - 
      */
 
-    /* store the user requested nodes in user_request_nodes array */
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, user_request_nodes[0]);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, user_request_nodes[1]);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, user_request_nodes[2]);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, user_request_nodes[3]);
-    genieWriteObject(GENIE_OBJ_LED_DIGITS, 4, user_request_nodes[4]);
+	/* user_node_voltages is the current voltages of the selected nodes */
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 0, user_node_voltages[0]);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 1, user_node_voltages[1]);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 2, user_node_voltages[2]);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 3, user_node_voltages[3]);
 
+	/* number currently being punched in by the user */
+	genieWriteObject(GENIE_OBJ_LED_DIGITS, 4, input_digit);
+s 	
+	/* user_node_indexes are selected nodes (numbers displayed) */
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 5, user_node_indexes[4]);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 6, user_node_indexes[5]);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 7, user_node_indexes[6]);
+    genieWriteObject(GENIE_OBJ_LED_DIGITS, 8, user_node_indexes[7]);
+ 
+ /*
     genieWriteObject(GENIE_OBJ_STRINGS, 0, user_request_nodes[0]);
     genieWriteObject(GENIE_OBJ_STRINGS, 1, user_request_nodes[1]);
     genieWriteObject(GENIE_OBJ_STRINGS, 2, user_request_nodes[2]);
     genieWriteObject(GENIE_OBJ_STRINGS, 3, user_request_nodes[3]);
-    genieWriteObject(GENIE_OBJ_STRINGS, 4, user_request_nodes[4]);
+	*/
 
-    input_digit1 = genieReadObject(GENIE_OBJ_KEYBOARD, 0);
-    input_digit2 = genieReadObject(GENIE_OBJ_KEYBOARD, 1);
+    input_digit = genieReadObject(GENIE_OBJ_KEYBOARD, 0);
 
 }
 
@@ -86,7 +94,7 @@ void myGenieEventHandler(void)
   //If the cmd received is from a Reported Object, which occurs if a Read Object is requested in the main code, reply processed here.
   if(Event.reportObject.cmd == GENIE_REPORT_OBJ)
   {
-    if (Event.reportObject.object == GENIE_OBJ_SLIDER)                // If the Reported Message was from a Slider
+    if (Event.rportObject.object == GENIE_OBJ_SLIDER)                // If the Reported Message was from a Slider
     {
       if (Event.reportObject.index == 0)                              // If Slider0
       {

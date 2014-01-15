@@ -4,8 +4,7 @@ int node_pos_values[64];
 int node_neg_values[64];
 int node_values[64];
 
-int user_request_nodes[5];
+int user_node_voltages[4];
+int user_node_indexes[4];
 
-int input_digit1;
-int input_digit2;
-
+int input_digit;
